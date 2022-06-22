@@ -20,6 +20,9 @@
                 <label>Danh Mục Cha</label>
                 <select class="form-control" name="parent_id">
                     <option value="0">Danh Mục Cha</option>
+                    @foreach ($menu as $m)
+                    <option value="{{ $m->id}}">{{ $m->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
