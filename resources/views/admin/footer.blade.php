@@ -5,4 +5,6 @@
 <!-- AdminLTE App -->
 <script src="{{url('/template/admin/dist/js/adminlte.min.js')}}"></script>
 
+<script src="{{url('/template/admin/js/main.js')}}"></script>
+
 @yield('footer')

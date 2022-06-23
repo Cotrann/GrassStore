@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ url('/admin') }}" class="brand-link">
       <img src="{{ url('/template/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">CosmeticsShop</span>
+      <span class="brand-text font-weight-light">Cosmetic Store</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,7 +45,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('/template/admin/index.html') }}" class="nav-link">
+                <a href="{{ url('/admin/menu/list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách danh mục</p>
                 </a>
