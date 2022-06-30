@@ -1,3 +1,8 @@
+<script>
+    const app_vars = {
+        base_url: "{{url('')}}"
+    }
+</script>
 <!-- jQuery -->
 <script src="{{url('/template/admin/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
@@ -5,6 +10,6 @@
 <!-- AdminLTE App -->
 <script src="{{url('/template/admin/dist/js/adminlte.min.js')}}"></script>
 
-<script src="{{url('/template/admin/js/main.js')}}"></script>
+<script src="{{url('/template/admin/js/main.js?t=6a')}}"></script>
 
 @yield('footer')
