@@ -20,6 +20,8 @@ class ProductAdminService
     }
 
 
+
+
     public function isValidPrice($request)
     {
         if ($request->input('price_sale') > $request->input('price'))
@@ -66,8 +68,9 @@ class ProductAdminService
 
             Session::flash('success', 'Cập Nhật Sản Phẩm Thành Công');
         } catch (\Exception $error) {
+
             Session::flash('error', 'Vui lòng thử lại');
-            Log::info($err->getMessage());
+            \Log::info($error->getMessage());
             return false;
         }
 
@@ -84,5 +87,31 @@ class ProductAdminService
         }
 
         return false;
+    }
+
+    public function postprice($request)
+    {
+        if ($request->input('menu_id') == 0) {
+            $product = $this->getAllProduct();
+        }
+        else {
+            $product = Product::where('menu_id', $request->input('menu_id')) -> get();
+        }
+        $rate = $request->input('rate');
+
+        try {
+            foreach ($product as $key => $p) {
+                $p->price_sale = $p->price*(100-$rate)/100;
+                $p->save();
+            }
+
+            Session::flash('success', 'Cài đặt giảm giá thành công');
+
+        } catch (\Exception $err) {
+            Session::flash('error', 'Vui lòng thử lại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+
     }
 }

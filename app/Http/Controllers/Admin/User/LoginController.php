@@ -16,6 +16,10 @@ class LoginController extends Controller
         ]);
     }
 
+    public function logout() {
+        Auth::logout();
+        return redirect('admin/users/login');
+    }
     public function store(Request $request)
     {
         $this -> validate($request, [

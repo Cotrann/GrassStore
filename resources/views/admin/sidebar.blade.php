@@ -1,3 +1,4 @@
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
@@ -12,8 +13,9 @@
 			<div class="image">
 				<img src="{{ url('/template/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
 			</div>
-			<div class="info">
-				<a href="#" class="d-block">Alexander Pierce</a>
+			<div class="info" style="display:flex;">
+				<a href="#" class="d-block" style="padding-right: 120px;">{{Auth::user()->name}}</a>
+                <a href="{{url('/logout')}}" class="d-block"><i class="fas fa-sign-out-alt"></i></a>
 			</div>
 		</div>
 		<!-- SidebarSearch Form -->
@@ -53,6 +55,12 @@
 								<p>Thêm danh mục</p>
 							</a>
 						</li>
+                        <li class="nav-item">
+                            <a href="{{ url('/admin/menu/discount') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Cài đặt giảm giá</p>
+                            </a>
+                        </li>
 					</ul>
 				</li>
 				<li class="nav-item">

@@ -59,11 +59,21 @@
 
             <div class="form-group">
                 <label>Ảnh sản phẩm</label>
-                <input type="file" name="file" id="upload" class="form-control" >
-                <div id="image_show">
-                    <a href="{{ url($product->thumb) }}" target="_blank">
-                        <img src="{{ url($product->thumb) }}" width="100px">
-                    </a>
+                <input type="file" name="file" id="upload" multiple class="form-control" >
+                <div id="image_show" class="row">
+
+                    @foreach (explode("\n", $product->thumb) as $thumb)
+                        <div class="box" data-url="{{ trim($thumb) }}">
+                            <button type="button" class="delete" onclick="deleteImage(this)">
+                                <span>&times;</span>
+                            </button>
+                            <div class="image">
+                                <img src="{{ url($thumb) }}" />
+                            </div>
+                        </div>
+
+                    @endforeach
+
                 </div>
                 <input type="hidden" name="thumb" value="{{ $product->thumb }}" id="thumb">
             </div>

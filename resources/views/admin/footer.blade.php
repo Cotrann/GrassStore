@@ -10,6 +10,6 @@
 <!-- AdminLTE App -->
 <script src="{{url('/template/admin/dist/js/adminlte.min.js')}}"></script>
 
-<script src="{{url('/template/admin/js/main.js?t=6a')}}"></script>
+<script src="{{url('/template/admin/js/main.js?t=').time()}}"></script>
 
 @yield('footer')

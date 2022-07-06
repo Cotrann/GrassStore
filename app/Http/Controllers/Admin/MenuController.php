@@ -74,4 +74,5 @@ class MenuController extends Controller
             'menu1' => $this->menuService->getParent()
         ]);
     }
+
 }

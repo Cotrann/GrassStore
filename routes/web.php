@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('destroy', [MenuController::class, 'destroy']);
             Route::get('edit/{menu}', [MenuController::class, 'show']);
             Route::post('edit/{menu}', [MenuController::class, 'update']);
+            Route::get('discount', [ProductController::class, 'getprice']);
+            Route::post('discount', [ProductController::class, 'postprice']);
         });
 
         #Products
@@ -52,5 +54,6 @@ Route::middleware(['auth'])->group(function () {
         #Upload
         Route::post('upload/services', [UploadController::class, 'store']);
     });
+    Route::get('logout', [LoginController::class, 'logout']);
 });
 

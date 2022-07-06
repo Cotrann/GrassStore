@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\Product\ProductAdminService;
 use App\Http\Requests\Product\ProductRequest;
+use App\Http\Requests\Product\DiscountRequest;
 use App\Models\Product;
 
 
@@ -119,5 +120,20 @@ class ProductController extends Controller
             'error' => true
         ]);
 
+    }
+
+    public function getprice()
+    {
+        return view('admin.menu.discount', [
+            'title' => 'Cài đặt giảm giá',
+            'menu' => $this->productAdminService->getMenu()
+        ]);
+    }
+
+    public function postprice(DiscountRequest $request)
+    {
+        $result = $this->productAdminService->postprice($request);
+
+        return redirect()->back();
     }
 }
