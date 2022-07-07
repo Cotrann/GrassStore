@@ -1,4 +1,11 @@
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
 (function ($) {
     "use strict";
 
@@ -23,7 +30,7 @@
         overlayParentElement : 'html',
         transition: function(url){ window.location.href = url; }
     });
-    
+
     /*[ Back to top ]
     ===========================================================*/
     var windowH = $(window).height()/2;
@@ -52,26 +59,26 @@
     else {
         var posWrapHeader = 0;
     }
-    
+
 
     if($(window).scrollTop() > posWrapHeader) {
         $(headerDesktop).addClass('fix-menu-desktop');
-        $(wrapMenu).css('top',0); 
-    }  
+        $(wrapMenu).css('top',0);
+    }
     else {
         $(headerDesktop).removeClass('fix-menu-desktop');
-        $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop()); 
+        $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop());
     }
 
     $(window).on('scroll',function(){
         if($(this).scrollTop() > posWrapHeader) {
             $(headerDesktop).addClass('fix-menu-desktop');
-            $(wrapMenu).css('top',0); 
-        }  
+            $(wrapMenu).css('top',0);
+        }
         else {
             $(headerDesktop).removeClass('fix-menu-desktop');
-            $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop()); 
-        } 
+            $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop());
+        }
     });
 
 
@@ -104,7 +111,7 @@
                     $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
                 }
             });
-                
+
         }
     });
 
@@ -137,7 +144,7 @@
             var filterValue = $(this).attr('data-filter');
             $topeContainer.isotope({filter: filterValue});
         });
-        
+
     });
 
     // init Isotope
@@ -176,7 +183,7 @@
         if($('.js-show-search').hasClass('show-search')) {
             $('.js-show-search').removeClass('show-search');
             $('.panel-search').slideUp(400);
-        }    
+        }
     });
 
     $('.js-show-search').on('click',function(){
@@ -186,7 +193,7 @@
         if($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
-        }    
+        }
     });
 
 
@@ -265,12 +272,50 @@
             }
         });
     });
-    
+
     /*==================================================================
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
+        //
+        console.log()
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                product_id: $(this).data('product-id')
+            },
+            url: app_vars.base_url+'/get-product',
+            success: function (results) {
+                if(results.length > 0) {
+                    var p = results[0];
+                    var price = p.price_sale != null ? '<span style="text-decoration: line-through;">'+addCommas(p.price)+'đ</span> <span style="color:red;">'+addCommas(p.price_sale)+'đ</span> ' : '<span>'+addCommas(p.price)+'đ</span>';
+                    $(".js-price").html(price)
+                    $(".js-description").html(p.description)
+                    var html = '';
+                    $('.js-name-detail').text(p.name)
+                    $.each(p.thumb.split("\r\n"), (i, item) => {
+                        html += `<div class="item-slick3" data-thumb="${app_vars.base_url+item}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="${app_vars.base_url+item}" alt="IMG-PRODUCT">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${app_vars.base_url+item}">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>`
+                    })
+                    $('.wrap-slick3').each(function(){
+                        $('.slick3').slick('removeSlide', null, null, true);
+                        $(this).find('.slick3').slick("slickAdd",
+                            html
+                        );
+                    });
+
+                    $('.js-modal1').addClass('show-modal1');
+                }
+            }
+        });
+
     });
 
     $('.js-hide-modal1').on('click',function(){
@@ -280,3 +325,14 @@
 
 
 })(jQuery);
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}

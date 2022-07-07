@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Str;
+
 class Helper
 {
     public static function menu($menu, $parent_id = 0, $char = '')
@@ -36,5 +38,58 @@ class Helper
 
         return $html;
 
+    }
+
+    public static function loadmenu($menu, $parent_id = 0) : string
+    {
+        $html = '';
+        foreach($menu as $key => $m) {
+            if ($m->parent_id == $parent_id) {
+                $html .= '
+                    <li>
+                        <a href="'.url('/danh-muc/'. $m->id .'-'. Str::slug($m->name, '-').'.html').'">
+                        '. $m->name .'
+                        </a>';
+
+                unset($menu[$key]);
+
+                if (self::isChild($menu, $m->id)) {
+                    $html .= '<ul class="sub-menu">';
+                    $html .= self::loadmenu($menu, $m->id);
+                    $html .= '</ul>';
+                }
+
+                $html .= '</li>
+                ';
+            }
+        }
+
+        return $html;
+
+    }
+
+    public static function isChild($menu, $id) : bool
+    {
+        foreach($menu as $m) {
+            if ($m->parent_id == $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function price($price, $price_sale)
+    {
+        if ($price_sale != 0) {
+            return '<span style="text-decoration: line-through;">'.number_format($price).'đ'.'</span> <span style="color:red; font-weight: bold;">'.number_format($price_sale).'đ</span>';
+        }
+        return number_format($price).'đ';
+    }
+
+    public static function handleimage($thumb)
+    {
+        $array = explode("\n", $thumb);
+        return $array[count($array)-1];
     }
 }

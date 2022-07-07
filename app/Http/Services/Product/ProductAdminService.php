@@ -16,7 +16,7 @@ class ProductAdminService
     public function getAllProduct(Type $var = null)
     {
         return Product::with('menu')
-        ->orderbyDesc ('id') -> paginate(15);
+        ->orderbyDesc ('id') -> paginate(10);
     }
 
 

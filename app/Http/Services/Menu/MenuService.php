@@ -64,5 +64,14 @@ class MenuService
         Session::flash('success', 'Cập Nhật Danh Mục Thành Công');
         return true;
     }
+
+
+    public function show()
+    {
+        return Menu::select('id', 'name')
+        ->where('active', 1)
+        ->where('parent_id', 0)
+        ->orderByDesc('id')->get();
+    }
 }
 

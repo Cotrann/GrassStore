@@ -3,12 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
+use App\View\Composers\MenuComposer;
+use Illuminate\Support\Facades\View;
 
-class AppServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -18,12 +19,12 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        View::composer('header', MenuComposer::class);
     }
 }

@@ -1,0 +1,23 @@
+html, body {
+    font-family: 'Itim', cursive;
+}
+.main-menu > li > a {
+    font-family: 'Itim', cursive;
+}
+
+.ltext-102 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.ltext-103 {
+    font-family: 'Spectral SC', serif;
+}
+
+.stext-106 {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 18px;
+}
+.stext-102 {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 16px;
+}

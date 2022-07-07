@@ -37,6 +37,8 @@
         </tbody>
     </table>
 
-    {!! $product -> links() !!}
+    <div class="card-footer clearfix">
+        {!! $product -> onEachSide(5) -> links() !!}
+    </div>
 
 @endsection
