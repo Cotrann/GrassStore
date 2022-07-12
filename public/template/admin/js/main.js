@@ -80,3 +80,7 @@ function deleteImage(el) {
     //console.log(url)
     $('#thumb').val(url);
 }
+$('input[type=radio][name=hasSize]').change(function() {
+    if(this.value == 1) $("#disp_size").show();
+    else $("#disp_size").hide();
+});

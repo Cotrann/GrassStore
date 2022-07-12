@@ -19,9 +19,6 @@ class ProductAdminService
         ->orderbyDesc ('id') -> paginate(10);
     }
 
-
-
-
     public function isValidPrice($request)
     {
         if ($request->input('price_sale') > $request->input('price'))
@@ -41,12 +38,9 @@ class ProductAdminService
         }
 
         try {
-
             $request->except('_token');
             Product::create ($request->all());
-
             Session::flash('success', 'Tạo Sản Phẩm Thành Công');
-
         } catch (\Exception $err) {
             Session::flash('error', $err->getMessage());
             return false;

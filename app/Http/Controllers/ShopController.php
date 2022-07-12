@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Product\ProductService;
+use App\Models\Product;
 
 class ShopController extends Controller
 {
@@ -27,7 +28,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('main', [
+        return view('home', [
             'title' => 'Grass Store',
             'sliders' => $this->slider->show(),
             'menus' => $this->menu->show(),
@@ -103,5 +104,32 @@ class ShopController extends Controller
     public function getproduct(Request $request)
     {
         return $this->product->getProduct($request->input('product_id'));
+    }
+    public function loadproduct(Request $request)
+    {
+        $page = $request->input('page', 0);
+        $result = $this->product->show($page);
+        $html = '';
+        $hasNext = true;
+        if (count($result) < 16) {
+            $hasNext = false;
+        } else if($this->product->countProduct() == ($page+1)*16){
+            $hasNext = false;
+        }
+        $html = view('product.list', ['products' => $result])->render();
+
+        return response()->json(['html' => $html, 'hasNext' => $hasNext]);
+    }
+    public function detailproduct(Request $request, $id, $slug = '')
+    {
+        $product = Product::where('id', $id)->first();
+
+        //dd($product->name);
+
+        return view('detail', [
+            'title' => $product->name,
+            'product' => $product
+        ]);
+
     }
 }

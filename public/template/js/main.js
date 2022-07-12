@@ -324,7 +324,60 @@ $.ajaxSetup({
 
 
 
+
 })(jQuery);
+function quickView(product_id) {
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            product_id: product_id
+        },
+        url: app_vars.base_url+'/get-product',
+        success: function (results) {
+            if(results.length > 0) {
+                var p = results[0];
+                var price = p.price_sale != null ? '<span style="text-decoration: line-through;">'+addCommas(p.price)+'đ</span> <span style="color:red;">'+addCommas(p.price_sale)+'đ</span> ' : '<span>'+addCommas(p.price)+'đ</span>';
+                $(".js-price").html(price)
+                $(".js-description").html(p.description)
+                var html = '';
+                $('.js-name-detail').text(p.name)
+                $.each(p.thumb.split("\r\n"), (i, item) => {
+                    html += `<div class="item-slick3" data-thumb="${app_vars.base_url+item}">
+                            <div class="wrap-pic-w pos-relative">
+                                <img src="${app_vars.base_url+item}" alt="IMG-PRODUCT">
+                                <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${app_vars.base_url+item}">
+                                    <i class="fa fa-expand"></i>
+                                </a>
+                            </div>
+                        </div>`
+                })
+                var size ='';
+                $.each(p.size.split(","), (i, item) => {
+                    if (item == '0') {
+                        size += `<option>Một Size</option>`
+                    } else {
+                        if (item == 'S' || item == 'M' || item == 'L') {
+                            size += `<option>Size ${item}</option>`
+                        }
+                        else {
+                            size += `<option>${item} mm</option>`
+                        }
+                    }
+                })
+                $(".js-size").html(size)
+                $('.wrap-slick3').each(function(){
+                    $('.slick3').slick('removeSlide', null, null, true);
+                    $(this).find('.slick3').slick("slickAdd",
+                        html
+                    );
+                });
+
+                $('.js-modal1').addClass('show-modal1');
+            }
+        }
+    });
+}
 function addCommas(nStr) {
     nStr += '';
     var x = nStr.split('.');
@@ -335,4 +388,20 @@ function addCommas(nStr) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
+}
+
+function loadMore() {
+    const page = parseInt($('#page').val());
+    $.ajax({
+        type : 'POST',
+        dataType : 'JSON',
+        data : { page },
+        url : app_vars.base_url+'/services/load-product',
+        success : function (result) {
+            $('#loadProducts').append(result.html);
+            $('#page').val(page + 1);
+            result.hasNext == false ? $('#button-loadMore').hide() : '';
+        }
+
+    })
 }

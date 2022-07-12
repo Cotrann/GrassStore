@@ -17,7 +17,8 @@ class Product extends Model
         'price_sale',
         'menu_id',
         'active',
-        'thumb'
+        'thumb',
+        'size'
     ];
 
 

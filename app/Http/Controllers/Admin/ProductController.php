@@ -53,8 +53,15 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        if($request->input('hasSize') == 1)
+            $request->merge([
+                'size' => implode(",", $request->input('size'))
+            ]);
+        else
+            $request->merge([
+                'size' => 0
+            ]);
         $result = $this->productAdminService->create($request);
-
         return redirect()->back();
     }
 
@@ -93,9 +100,15 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductRequest $request)
     {
+        if($request->input('hasSize') == 1)
+            $request->merge([
+                'size' => implode(",", $request->input('size'))
+            ]);
+        else
+            $request->merge([
+                'size' => 0
+            ]);
         $this->productAdminService->update($product, $request);
-
-
         return redirect(url('admin/products/list'));
     }
 

@@ -6,8 +6,8 @@
             <div class="block2-pic hov-img0">
                 <img src="{{ url(\App\Helpers\Helper::handleimage($product->thumb) )}}" alt="IMG-PRODUCT">
 
-                <a href="" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-product-id="{{$product->id}}">
-                    Quick View
+                <a href="javascript:void(0)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onclick="quickView({{$product->id}})">
+                    Xem Nhanh
                 </a>
             </div>
 
@@ -32,8 +32,5 @@
         </div>
     </div>
     @endforeach
-
-
 </div>
-
 

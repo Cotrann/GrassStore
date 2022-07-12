@@ -1088,7 +1088,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*------------------------------------------------------------------
 [ in select ]*/
 .rs1-select2 .select2-container .select2-selection--single .select2-selection__rendered {
-  font-family: Poppins-Regular;
+  font-family: 'Philosopher', sans-serif;
   font-size: 13px;
   color: #555;
   line-height: 1.2;
@@ -1165,7 +1165,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .rs1-select2 .select2-results__options {
-  font-family: Poppins-Regular;
+    font-family: 'Philosopher', sans-serif;
   font-size: 13px;
   color: #555;
   line-height: 1.2;
@@ -1174,7 +1174,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .rs1-select2 .select2-search--dropdown .select2-search__field {
   border: 1px solid #aaa;
   outline: none;
-  font-family: Poppins-Regular;
+  font-family: 'Philosopher', sans-serif;
   font-size: 13px;
   color: #555;
   line-height: 1.2;

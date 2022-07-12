@@ -3,6 +3,7 @@
 namespace App\Http\Services\Menu;
 
 use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class MenuService
@@ -72,6 +73,39 @@ class MenuService
         ->where('active', 1)
         ->where('parent_id', 0)
         ->orderByDesc('id')->get();
+    }
+
+    public function getById($id)
+    {
+        return Menu::where('id', $id)
+        ->where('active', 1)
+        ->firstOrFail();
+    }
+
+    public function getProducts($request, $menu)
+    {
+        $qr = 'active = 1 and ( ';
+        foreach($menu as $m) {
+            $qr .= 'menu_id = '.$m->id.' or ';
+        }
+
+        $query = Product::whereRaw('( '.trim($qr, 'or ').' )'.' )');
+        if ($request->input('price')) {
+            $query->orderBy('price', $request->input('price'));
+        }
+
+        if ($request->input('id')) {
+            $query->orderBy('id', $request->input('id'));
+        }
+
+        return $query->paginate(12)->withQueryString();
+    }
+
+    public function getSubmenu($parent_id)
+    {
+        return Menu::where('parent_id', $parent_id)
+        ->where('active', 1)
+        ->get();
     }
 }
 

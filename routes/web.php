@@ -8,6 +8,7 @@ use \App\Http\Controllers\Admin\ProductController;
 use \App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\SliderController;
 use \App\Http\Controllers\ShopController;
+use \App\Http\Controllers\CategoriesController;
 
 Route::get('admin/users/login', [LoginController::class, 'index']) -> name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
@@ -60,3 +61,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [ShopController::class, 'index']);
 Route::post('/get-product', [ShopController::class, 'getproduct']);
+Route::post('/services/load-product', [ShopController::class, 'loadproduct']);
+Route::get('danh-muc/{id}-{slug}.html', [CategoriesController::class, 'index']);
+Route::get('san-pham/{id}-{slug}.html', [ShopController::class, 'detailproduct']);

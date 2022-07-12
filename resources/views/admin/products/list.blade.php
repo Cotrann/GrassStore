@@ -9,6 +9,7 @@
                 <th>Danh Mục</th>
                 <th>Giá gốc</th>
                 <th>Giá Khuyến Mãi</th>
+                <th>Size</th>
                 <th>Active</th>
                 <th>Update</th>
                 <th style="width: 80px">Edit/Delete</th>
@@ -22,6 +23,7 @@
                 <td>{{ $p->menu->name }}</td>
                 <td>{{ $p->price }}</td>
                 <td>{{ $p->price_sale }}</td>
+                <td>{{ $p->size }}</td>
                 <td>{!! $p->active == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>' !!}</td>
                 <td>{{ $p->updated_at }}</td>
                 <td>
