@@ -39,7 +39,25 @@ class Helper
         return $html;
 
     }
+    public static function loadbreadcrumb($menu, $menu_id) : string
+    {
+        $html = '';
+        foreach($menu as $key => $m) {
+            if($m->id == $menu_id) {
+                $html = '<a href="'.url('/danh-muc/'. $m->id .'-'. Str::slug($m->name, '-').'.html').'" class="stext-109 cl8 hov-cl1 trans-04">
+                            '.$m->name.'
+                            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                        </a>'.$html;
+                unset($menu[$key]);
 
+                if (self::isChild2($menu, $m->parent_id)) {
+                    $html = self::loadbreadcrumb($menu, $m->parent_id).$html;
+                }
+            }
+        }
+        return $html;
+
+    }
     public static function loadmenu($menu, $parent_id = 0) : string
     {
         $html = '';
@@ -78,7 +96,16 @@ class Helper
 
         return false;
     }
+    public static function isChild2($menu, $id) : bool
+    {
+        foreach($menu as $m) {
+            if ($m->id == $id) {
+                return true;
+            }
+        }
 
+        return false;
+    }
     public static function price($price, $price_sale)
     {
         if ($price_sale != 0) {

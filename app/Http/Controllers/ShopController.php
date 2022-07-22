@@ -7,6 +7,7 @@ use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Product\ProductService;
 use App\Models\Product;
+use App\Models\Menu;
 
 class ShopController extends Controller
 {
@@ -123,12 +124,15 @@ class ShopController extends Controller
     public function detailproduct(Request $request, $id, $slug = '')
     {
         $product = Product::where('id', $id)->first();
-
-        //dd($product->name);
-
-        return view('detail', [
+        $productMore = $this->product->more($product);
+        return view('product.detail', [
             'title' => $product->name,
-            'product' => $product
+            'product' => $product,
+            'products' => $productMore,
+            'mmm' => Menu::select('id', 'name', 'parent_id')
+                        ->orderbyDesc ('id')
+                        ->where('active', 1)
+                        -> get()
         ]);
 
     }

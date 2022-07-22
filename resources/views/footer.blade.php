@@ -197,25 +197,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                             </div>
 
                             <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Color
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
                                 <div class="size-204 flex-w flex-m respon6-next">
                                     <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -284,7 +265,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{{ url('template/vendor/daterangepicker/daterangepicker.js') }}"></script>
 <!--===============================================================================================-->
 	<script src="{{ url('template/vendor/slick/slick.min.js') }}"></script>
-	<script src="{{ url('template/js/slick-custom.js') }}"></script>
+	<script src="{{ url('template/js/slick-custom.js?t=').time() }}"></script>
 <!--===============================================================================================-->
 	<script src="{{ url('template/vendor/parallax100/parallax100.js') }}"></script>
 	<script>

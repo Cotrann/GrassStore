@@ -9,6 +9,7 @@ use \App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\SliderController;
 use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\CategoriesController;
+use \App\Http\Controllers\CartController;
 
 Route::get('admin/users/login', [LoginController::class, 'index']) -> name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
@@ -64,3 +65,6 @@ Route::post('/get-product', [ShopController::class, 'getproduct']);
 Route::post('/services/load-product', [ShopController::class, 'loadproduct']);
 Route::get('danh-muc/{id}-{slug}.html', [CategoriesController::class, 'index']);
 Route::get('san-pham/{id}-{slug}.html', [ShopController::class, 'detailproduct']);
+Route::post('add-cart', [CartController::class, 'index']);
+Route::get('carts', [CartController::class, 'show']);
+Route::get('carts/delete/{id}/{size}', [CartController::class, 'destroy']);

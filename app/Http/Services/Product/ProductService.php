@@ -33,4 +33,13 @@ class ProductService
         return Product::where('active', 1)
         ->count();
     }
+    public function more($product)
+    {
+        return Product::where('active', 1)
+                        ->where('menu_id', $product->menu_id)
+                        ->where('id', '!=', $product->id)
+                        ->orderByDesc('id')
+                        ->limit(8)
+                        ->get();
+    }
 }

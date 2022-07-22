@@ -1,12 +1,12 @@
-<title>Home</title>
+<title>{{ $title }}</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{{ url('template/images/icons/favicon.png"/') }}">
+	<link rel="icon" type="image/png" href="{{ url('template/images/icons/favicon.png') }}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url('template/vendor/bootstrap/css/bootstrap.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('template/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url('template/fonts/iconic/css/material-design-iconic-font.min.css') }}">
 <!--===============================================================================================-->
