@@ -28,7 +28,7 @@ class CartController extends Controller
             return redirect()->back();
         }
 
-        return redirect('/carts');
+        return redirect()->back();
 
     }
 
@@ -87,9 +87,26 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $product_id = $request->input('product_id');
+        $size = $request->input('size');
+        $carts = Session::get('carts');
+        foreach($carts[$product_id] as $key => $c) {
+            if($c['size'] == $size) {
+                if($request->input('type') == 'increase') {
+                    $carts[$product_id][$key]['qty'] = $carts[$product_id][$key]['qty'] + 1;
+                } elseif ($request->input('type') == 'decrease') {
+                    $carts[$product_id][$key]['qty'] = $carts[$product_id][$key]['qty'] - 1;
+                }
+            }
+        }
+        Session::put('carts', $carts);
+        Session::save();
+        return response()->json([
+            'error' => false,
+        ]);
+
     }
 
     /**
@@ -107,7 +124,6 @@ class CartController extends Controller
                 if(count($carts[$id]) <= 1) {
                     unset($carts[$id]);
                 } else {
-                    //dd('day roi');
                     unset($carts[$id][$key]);
                 }
             }

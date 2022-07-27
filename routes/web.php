@@ -10,12 +10,16 @@ use \App\Http\Controllers\Admin\SliderController;
 use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\CartController;
+use \App\Http\Controllers\CheckoutController;
+use \App\Http\Controllers\UserController;
 
-Route::get('admin/users/login', [LoginController::class, 'index']) -> name('login');
-Route::post('admin/users/login/store', [LoginController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'index']) -> name('login');
+Route::post('/login/store', [LoginController::class, 'store']);
+Route::post('/login', [LoginController::class, 'register']);
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('checkAdmin')->group(function () {
 
     Route::prefix('admin')->group(function() {
         Route::get('/', [MainController::class, 'index'])->name('admin');
@@ -53,11 +57,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('edit/{slide}', [SliderController::class, 'update']);
         });
 
-
         #Upload
         Route::post('upload/services', [UploadController::class, 'store']);
     });
-    Route::get('logout', [LoginController::class, 'logout']);
+    Route::get('logout', [UserController::class, 'logout']);
 });
 
 Route::get('/', [ShopController::class, 'index']);
@@ -68,3 +71,13 @@ Route::get('san-pham/{id}-{slug}.html', [ShopController::class, 'detailproduct']
 Route::post('add-cart', [CartController::class, 'index']);
 Route::get('carts', [CartController::class, 'show']);
 Route::get('carts/delete/{id}/{size}', [CartController::class, 'destroy']);
+Route::post('carts/update', [CartController::class, 'update']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index']);
+    Route::post('/checkout', [CheckoutController::class, 'store']);
+    Route::get('/profile', [UserController::class, 'index']);
+    Route::post('/profile', [UserController::class, 'update']);
+    Route::post('/profile/changepassword', [UserController::class, 'changePassword']);
+    Route::get('logout', [UserController::class, 'logout']);
+});

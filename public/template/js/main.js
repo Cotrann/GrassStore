@@ -223,14 +223,40 @@ $.ajaxSetup({
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+        if(numProduct > 1) {
+            $(this).next().val(numProduct - 1);
+            $(this).parent().parent().next().text(addCommas($(this).next().data('price')*(numProduct-1)))
+            $.ajax({
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    product_id: $(this).next().data('product-id'),
+                    size: $(this).next().data('size'),
+                    type: 'decrease'
+                },
+                url: app_vars.base_url+'/carts/update',
+            })
+            calTotal()
+        }
     });
 
     $('.btn-num-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
+        $(this).parent().parent().next().text(addCommas($(this).prev().data('price')*(numProduct+1)))
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                product_id: $(this).prev().data('product-id'),
+                size: $(this).prev().data('size'),
+                type: 'increase'
+            },
+            url: app_vars.base_url+'/carts/update',
+        })
+        calTotal()
     });
-
+    calTotal()
     /*==================================================================
     [ Rating ]*/
     $('.wrap-rating').each(function(){
@@ -396,7 +422,7 @@ function quickView(product_id) {
                     //     html
                     // );
                 });
-
+                $("input[name='product_id']").val(product_id)
                 $('.js-modal1').addClass('show-modal1');
             }
         }
@@ -429,3 +455,45 @@ function loadMore() {
 
     })
 }
+
+function calTotal() {
+    var total = 0;
+    $.each($(".column-6"), (i, item) => {
+        if(i == 0) return;
+        var text = parseInt($(item).text().split(",").join(""));
+        total += text
+    })
+    $(".price-total").text(addCommas(total)+'đ')
+}
+function calTotal2() {
+    var total = 0;
+    $.each($(".column-5"), (i, item) => {
+        var text = parseInt($(item).text().split(",").join(""));
+        total += text
+    })
+    console.log(total)
+    $(".price-total2").text(addCommas(total)+'đ')
+}
+
+function calshipfee() {
+    var shipfee = 30000;
+    var count = 0;
+    $.each($(".column-4"), (i, item) => {
+        var text = parseInt($(item).text().split("x").join(""));
+        count += text;
+    })
+    if (count >= 3) shipfee = 0;
+    $(".ship-fee").text(addCommas(shipfee)+'đ')
+    $(".total").text(addCommas(parseInt($(".price-total2").text().split(",").join(""))+parseInt($(".ship-fee").text().split(",").join("")))+'đ')
+}
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
+    let activeTab = $(event.target), // activated tab
+        id = activeTab.attr('href'); // active tab href
+
+       // set id in html5 localstorage for later usage
+       localStorage.setItem('activeTab', id);
+
+  });
+
+

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Orders;
 
 class Product extends Model
 {
@@ -26,5 +27,10 @@ class Product extends Model
     {
         return $this->hasOne(Menu::class, 'id', 'menu_id')
         ->withDefault(['name'=>'']);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Orders::class, 'Order_detail', 'product_id', 'order_id');
     }
 }

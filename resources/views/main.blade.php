@@ -14,7 +14,6 @@
 	<!-- Cart -->
     @include('cart')
 
-
     @yield('content')
 
 

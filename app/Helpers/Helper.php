@@ -119,4 +119,13 @@ class Helper
         $array = explode("\n", $thumb);
         return $array[count($array)-1];
     }
+
+    public function ordered_status($status)
+    {
+        if ($status != 0) {
+            return '<i class="fa-solid fa-truck-fast"></i>';
+        } else {
+            return '<i class="fa-solid fa-circle-check"></i>';
+        }
+    }
 }

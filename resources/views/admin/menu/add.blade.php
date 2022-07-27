@@ -6,7 +6,7 @@
 
 @section('content')
     <form action="" method="POST">
-
+        
         @csrf
 
         <div class="card-body">

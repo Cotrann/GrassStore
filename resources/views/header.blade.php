@@ -12,16 +12,8 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
+						<a href="{{url('/profile')}}" class="flex-c-m trans-04 p-lr-25">
+							Tài khoản của tôi
 						</a>
 					</div>
 				</div>
@@ -58,10 +50,24 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
+                        @php
+                        $count = 0;
+                        if (is_null(Session::get('carts')))
+                        {
+                            $count = 0;
+                        }
+                        else {
+                            foreach (Session::get('carts') as $cart) {
+                                $count = $count + count($cart);
+                            }
+                        }
+                        @endphp
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
+                        <a href="{{ url('/carts')}}">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify={{ $count }}>
+                                <i class="zmdi zmdi-shopping-cart"></i>
+                            </div>
+                        </a>
 
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>

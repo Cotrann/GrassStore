@@ -14,5 +14,62 @@
     font-family: 'Philosopher', sans-serif;
     font-size: 16px;
 }
+.cart-body {
+    display: revert;
+}
+
+.table-shopping-cart {
+    min-width: 0;
+}
+
+.hov-btn3:hover {
+    text-decoration: none;
+}
+
+.stext-111, .stext-110, .stext-101, .mtext-109, .ltext-106, .left-top-bar, .right-top-bar a, .btn-block {
+    font-family: 'Lora', serif;
+}
+
+.size-200, .bor8 {
+    width: 100%;
+}
+
+.table-shopping-cart .table_head th {
+    font-family: 'Lora', serif;
+    font-weight: 1000;
+}
+
+.back:hover, .back:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.p-b-30, .p-tb-30, .p-all-30 {
+    padding-bottom: 0;
+}
+
+.p-b-13, .p-tb-13, .p-all-13 {
+    padding: 5px;
+}
+.p-t-15, .p-tb-15, .p-all-15 {
+    padding-top: 5px;
+}
+
+.size-209 {
+    text-align: right;
+}
+
+.column-sl {
+    width: 100px;
+}
+
+.column-note {
+    width: 200px;
+}
+
+.column-sl, .column-price, .column-note, .column-status {
+    text-align: center;
+}
+
 
 

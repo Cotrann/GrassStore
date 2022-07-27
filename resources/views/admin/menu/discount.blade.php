@@ -39,11 +39,11 @@
 @endsection
 
 @section('footer')
-     <script>
+    <script>
         ClassicEditor
         .create( document.querySelector( '#content'))
         .catch( error => {
             console.log( error );
         } );
-     </script>
+    </script>
 @endsection
