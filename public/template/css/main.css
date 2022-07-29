@@ -422,7 +422,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .sub-menu a {
-  font-family: 'Itim', cursive;
+  font-family: 'Philosopher', sans-serif;
   font-size: 18px;
   line-height: 1.5;
   color: #555;
@@ -736,7 +736,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .main-menu-m > li > a {
-  font-family: 'Itim', cursive;
+  font-family: 'Philosopher', sans-serif;
   font-size: 14px;
   color: white;
   line-height: 2.8;

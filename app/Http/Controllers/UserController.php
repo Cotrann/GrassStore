@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Services\UserService;
+use App\Http\Services\User\UserService;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -39,6 +39,9 @@ class UserController extends Controller
             foreach ($order->products as $product) {
                 $order->items += $product->pivot->quantity;
                 $order->total += $product->pivot->price;
+            }
+            if ($order->items < 3) {
+                $order->total += 30000;
             }
         }
 
@@ -77,7 +80,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $orders = Orders::find($id);
+        $orders->products;
+        $orders->items = 0;
+        $orders->total = 0;
+        foreach ($orders->products as $product) {
+            $orders->items += $product->pivot->quantity;
+            $orders->total += $product->pivot->price;
+        }
+        if ($orders->items < 3) {
+            $orders->total += 30000;
+        }
+        return response()->json(['orders' => $orders]);
     }
 
     /**

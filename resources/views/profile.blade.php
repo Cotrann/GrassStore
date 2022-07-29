@@ -50,7 +50,7 @@
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                                    <input class="btn btn-primary" type="submit" value="Cập nhật">
+                                    <input class="btn mb-2 mb-md-0 btn-outline-secondary btn-block" type="submit" value="Cập nhật" style="width: 20%">
                                 </div>
                             </div>
                             @csrf
@@ -79,7 +79,7 @@
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                                    <input class="btn btn-primary" type="submit" value="Đổi mật khẩu">
+                                    <input class="btn mb-2 mb-md-0 btn-outline-secondary btn-block" type="submit" value="Đổi mật khẩu" style="width: 20%">
                                 </div>
                             </div>
                             @csrf
@@ -111,9 +111,9 @@
                                                 {!! \App\Helpers\Helper::ordered_status($order->status) !!}
                                             </td>
                                             <td class="column-action" style="padding-right: 5px">
-                                                <button type="button" class="btn mb-2 mb-md-0 btn-outline-secondary btn-block">Chi tiết</button>
+                                                <a class="btn mb-2 mb-md-0 btn-outline-secondary btn-block" href="javascript:void(0);" onclick="getOrderDetail({{$order->id}})">Chi tiết</a>
                                                 @if ($order->status == '1')
-                                                <button type="button" class="btn mb-2 mb-md-0 btn-outline-secondary btn-block">Đã nhận được hàng</button>
+                                                <a class="btn mb-2 mb-md-0 btn-outline-secondary btn-block" href="javascript:void(0);" id="btn-receiveOrder-{{$order->id}}" onclick="receiveOrder({{$order->id}},this)">Đã nhận được hàng</a>
                                                 @endif
                                             </td>
                                         </tr>

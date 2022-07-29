@@ -11,8 +11,8 @@
         @include('header')
 	</header>
 
-	<!-- Cart -->
-    @include('cart')
+
+
 
     @yield('content')
 

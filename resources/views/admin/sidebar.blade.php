@@ -32,8 +32,6 @@
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-				<!-- Add icons to the links using the .nav-icon class
-					with font-awesome or any other icon font library -->
 				<li class="nav-item">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-bars"></i>
@@ -105,6 +103,40 @@
 							<a href="{{ url('/admin/sliders/add') }}" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Thêm Slider</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+                <li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fa-solid fa-user-group"></i>
+						<p>
+							Người dùng
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ url('/admin/users/list') }}" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Danh sách người dùng</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+                <li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fa-solid fa-box-open"></i>
+						<p>
+							Đơn hàng
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ url('/admin/orders/list') }}" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Danh sách Đơn Hàng</p>
 							</a>
 						</li>
 					</ul>

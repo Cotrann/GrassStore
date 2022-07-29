@@ -9,6 +9,7 @@
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
+                    @include('alert')
                     <div class="wrap-table-shopping-cart">
                         <table class="table-shopping-cart">
                             <tbody>

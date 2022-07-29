@@ -7,11 +7,13 @@ use \App\Http\Controllers\Admin\MenuController;
 use \App\Http\Controllers\Admin\ProductController;
 use \App\Http\Controllers\Admin\UploadController;
 use \App\Http\Controllers\Admin\SliderController;
+use \App\Http\Controllers\Admin\OrderAdminController;
 use \App\Http\Controllers\ShopController;
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\CheckoutController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\OrderController;
 
 
 Route::get('/login', [LoginController::class, 'index']) -> name('login');
@@ -57,6 +59,19 @@ Route::middleware('checkAdmin')->group(function () {
             Route::post('edit/{slide}', [SliderController::class, 'update']);
         });
 
+        #Users
+        Route::prefix('users')->group(function() {
+            Route::get('list', [MainController::class, 'list']);
+            Route::delete('destroy', [MainController::class, 'destroy']);
+            Route::get('edit/{user}', [MainController::class, 'show']);
+            Route::post('edit/{user}', [MainController::class, 'update']);
+        });
+
+
+        Route::get('orders/list', [OrderAdminController::class, 'list']);
+        Route::get('order_detail/{order}', [OrderAdminController::class, 'show']);
+
+
         #Upload
         Route::post('upload/services', [UploadController::class, 'store']);
     });
@@ -79,5 +94,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'index']);
     Route::post('/profile', [UserController::class, 'update']);
     Route::post('/profile/changepassword', [UserController::class, 'changePassword']);
+    Route::get('/ordered/{order}', [UserController::class, 'show']);
+    Route::post('/receiveOrder/{order}',[OrderController::class, 'update'] );
     Route::get('logout', [UserController::class, 'logout']);
+
 });

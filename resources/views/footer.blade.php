@@ -159,28 +159,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             <button class="how-pos3 hov3 trans-04 js-hide-modal1">
                 <img src="{{ url('template/images/icons/icon-close.png')}}" alt="CLOSE">
             </button>
-            <form action="{{ url('/add-cart') }}" method="POST">
-                <div class="row">
-                    <div class="col-md-6 col-lg-7 p-b-30">
-                        <div class="p-l-25 p-r-30 p-lr-0-lg">
-                            <div class="wrap-slick3 flex-sb flex-w">
-                                <div class="wrap-slick3-dots"></div>
-                                <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                                <div class="slick3 gallery-lb"></div>
-                            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-7 p-b-30">
+                    <div class="p-l-25 p-r-30 p-lr-0-lg">
+                        <div class="wrap-slick3 flex-sb flex-w">
+                            <div class="wrap-slick3-dots"></div>
+                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+                            <div class="slick3 gallery-lb"></div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6 col-lg-5 p-b-30">
+                    <div class="p-r-50 p-t-5 p-lr-0-lg">
+                        <h4 class="mtext-105 cl2 js-name-detail p-b-14"></h4>
 
-                    <div class="col-md-6 col-lg-5 p-b-30">
-                        <div class="p-r-50 p-t-5 p-lr-0-lg">
-                            <h4 class="mtext-105 cl2 js-name-detail p-b-14"></h4>
+                        <span class="mtext-106 cl2 js-price"></span>
 
-                            <span class="mtext-106 cl2 js-price"></span>
+                        <p class="stext-102 cl3 p-t-23 js-description"> </p>
 
-                            <p class="stext-102 cl3 p-t-23 js-description"> </p>
-
-                            <!--  -->
+                        <form action="{{ url('/add-cart') }}" method="POST">
                             <div class="p-t-33">
                                 <div class="flex-w flex-r-m p-b-10">
                                     <div class="size-203 flex-c-m respon6">
@@ -235,9 +234,134 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 </a>
                             </div>
                             @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal2 -->
+<div class="wrap-modal1 js-modal2 p-t-60 p-b-20">
+    <div class="overlay-modal1 js-hide-modal2"></div>
+    <div class="container">
+        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+            <button class="how-pos3 hov3 trans-04 js-hide-modal2">
+                <img src="{{ url('template/images/icons/icon-close.png')}}" alt="CLOSE">
+            </button>
+            <div class="row">
+                <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                    <div class="m-l-25 m-r--38 m-lr-0-xl">
+                        <div class="wrap-table-shopping-cart">
+                            <table class="table-shopping-cart">
+                                <tbody id="disp_prd">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </form>
+                </div>
+
+                <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                        <h4 class="mtext-109 cl2 p-b-30">
+                            Thông tin người nhận
+                        </h4>
+
+                        <div class="flex-w flex-t p-t-15 p-b-13">
+                            <div class="size-200">
+                                <span class="stext-110 cl2">
+                                    Họ và Tên:
+                                </span>
+                            </div>
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" id="ord_name" value="">
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-t-15 p-b-13">
+                            <div class="size-200">
+                                <span class="stext-110 c12">
+                                    Số điện thoại:
+                                </span>
+                            </div>
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" id="ord_phone" value="">
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-t-15 p-b-13">
+                            <div class="size-200">
+                                <span class="stext-110 cl2">
+                                    Địa chỉ:
+                                </span>
+                            </div>
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" id="ord_address" value="">
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-t-15 p-b-13">
+                            <div class="size-200">
+                                <span class="stext-110 cl2">
+                                    Email:
+                                </span>
+                            </div>
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" id="ord_email" value="tthao3333@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-t-15 p-b-13">
+                            <div class="size-200">
+                                <span class="stext-110 cl2">
+                                    Ghi chú:
+                                </span>
+                            </div>
+                            <div class="bor8 bg0 m-b-12">
+                                <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="order_note" id="ord_note">
+                            </div>
+                        </div>
+
+
+                        <div class="flex-w flex-t p-b-13">
+                            <div class="size-208" style="width: 40%">
+                                <span class="stext-110 cl2">
+                                    Tổng số tiền:
+                                </span>
+                            </div>
+
+                            <div class="size-209" style="width: 60%">
+                                <span class="mtext-110 cl2" id="ord_price">5,670,000đ</span>
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t bor12 p-b-13">
+                            <div class="size-208">
+                                <span class="stext-110 cl2">
+                                    Phí ship:
+                                </span>
+                            </div>
+
+                            <div class="size-209">
+                                <span class="mtext-110 cl2 " id="ord_ship"></span>
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-b-13" style="padding-top: 15px; padding-bottom: 15px">
+                            <div class="size-208" style="width: 60%">
+                                <span class="stext-110 cl2">
+                                    TỔNG THANH TOÁN:
+                                </span>
+                            </div>
+
+                            <div class="size-209" style="width: 40%">
+                                <span class="mtext-110 cl2" id="ord_total"></span>
+                            </div>
+                        </div>
+                        <div id="ord_accept">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

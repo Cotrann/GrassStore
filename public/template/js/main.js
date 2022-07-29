@@ -347,11 +347,87 @@ $.ajaxSetup({
     $('.js-hide-modal1').on('click',function(){
         $('.js-modal1').removeClass('show-modal1');
     });
-
-
-
-
+    $('.js-hide-modal2').on('click',function(){
+        $('.js-modal2').removeClass('show-modal1');
+    });
 })(jQuery);
+function getOrderDetail(order_id) {
+    $.ajax({
+        type: 'GET',
+        dataType: 'JSON',
+        data: {},
+        url: app_vars.base_url+'/ordered/'+order_id,
+        success: function (results) {
+            if(results.orders && results.orders.products) {
+                $("#disp_prd").empty()
+                $("#disp_prd").append(`<tr class="table_head">
+                    <th colspan="2" style="padding-left: 20px">Tổng quan đơn hàng</th>
+                </tr>`)
+                $.each(results.orders.products, (i, item) => {
+                    $("#disp_prd").append(
+                        `<tr class="table_row">
+                            <td class="" style="padding-left: 30px">
+                                <div class="how-itemcart1">
+                                    <img src="${app_vars.base_url+'/'+item.thumb.split("\r\n")[item.thumb.split("\r\n").length-1]}" alt="IMG">
+                                </div>
+                            </td>
+                            <td>${item.name}</td>
+                            <td style="text-align: center;">
+                                ${item.pivot.size}
+                            </td>
+                            <td class="" style="text-align: right; width: 30px">
+                                x${item.pivot.quantity}
+                            </td>
+                            <td style="padding-left: 20px; padding-right: 20px; text-align: right">
+                                ${addCommas(item.pivot.price)}đ
+                            </td>
+                        </tr>`
+                    )
+                })
+                $('#ord_name').val(results.orders.name);
+                $('#ord_address').val(results.orders.address);
+                $('#ord_phone').val(results.orders.phone);
+                $('#ord_email').val(results.orders.email);
+                $('#ord_note').val(results.orders.note);
+                if (results.orders.items >= 3) {
+                    $('#ord_price').text(addCommas(results.orders.total)+'đ');
+                    $('#ord_ship').text(0+'đ');
+                } else {
+                    $('#ord_price').text(addCommas(results.orders.total - 30000)+'đ');
+                    $('#ord_ship').text(addCommas(30000)+'đ');
+                }
+                $('#ord_total').text(addCommas(results.orders.total)+'đ');
+                if (results.orders.status == 1) {
+                    $("#ord_accept").empty()
+                    $("#ord_accept").append(
+                        `<a class="btn mb-2 mb-md-0 btn-outline-secondary btn-block" href="javascript:void(0);" id="btn-receiveOrder2-${results.orders.id}" onclick="receiveOrder(${results.orders.id}, this)">
+                            Đã nhận được hàng
+                        </a>`
+                    )
+                }
+                $('.js-modal2').addClass('show-modal1');
+            }
+        }
+    });
+}
+
+function receiveOrder(order_id) {
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            order_id: order_id
+        },
+        url: app_vars.base_url+'/receiveOrder/'+order_id,
+        success: function (results) {
+            if (results.status) {
+                swal("Nhận hàng thành công","Cảm ơn bạn đã ủng hộ. Nếu có vấn đề về đơn hàng vui lòng liên hệ với chúng tôi qua hotline: 0987764294", "success");
+                $('#btn-receiveOrder-'+order_id).hide()
+                $('#btn-receiveOrder2-'+order_id).hide()
+            }
+        }
+    });
+}
 function quickView(product_id) {
     $.ajax({
         type: 'POST',
@@ -487,6 +563,7 @@ function calshipfee() {
     $(".total").text(addCommas(parseInt($(".price-total2").text().split(",").join(""))+parseInt($(".ship-fee").text().split(",").join("")))+'đ')
 }
 
+
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
     let activeTab = $(event.target), // activated tab
         id = activeTab.attr('href'); // active tab href
@@ -494,6 +571,6 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
        // set id in html5 localstorage for later usage
        localStorage.setItem('activeTab', id);
 
-  });
+});
 
 

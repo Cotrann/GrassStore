@@ -1,5 +1,5 @@
 .main-menu > li > a {
-    font-family: 'Itim', cursive;
+    font-family: 'Philosopher', sans-serif;
 }
 
 .ltext-102 {
@@ -10,9 +10,9 @@
     font-family: 'Spectral SC', serif;
 }
 
-.stext-102, .stext-106 {
+.stext-102, .stext-106, .swal-title, .swal-text {
     font-family: 'Philosopher', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 .cart-body {
     display: revert;
@@ -26,7 +26,8 @@
     text-decoration: none;
 }
 
-.stext-111, .stext-110, .stext-101, .mtext-109, .ltext-106, .left-top-bar, .right-top-bar a, .btn-block {
+.stext-111, .stext-110, .stext-101, .mtext-109, .ltext-106, .left-top-bar, .right-top-bar a, .btn-block, .table-shopping-cart td {
+    font-size: 15px;
     font-family: 'Lora', serif;
 }
 
@@ -35,6 +36,7 @@
 }
 
 .table-shopping-cart .table_head th {
+    font-size: 15px;
     font-family: 'Lora', serif;
     font-weight: 1000;
 }

@@ -14,12 +14,15 @@ class CheckoutService
 
     public function create($request, $id)
     {
-
         $carts = Session::get('carts');
         try {
             if ($order = Orders::create([
                 'user_id' => (int) $id,
-                'order_note' =>(string) $request->input('order_note')
+                'order_note' =>(string) $request->input('order_note'),
+                'name' => (string) $request->input('name'),
+                'email' => (string) $request->input('email'),
+                'phone' => (string) $request->input('phone'),
+                'address' => (string) $request->input('address')
             ])) {
                 foreach ($carts as $product_id => $products) {
                     foreach($products as $product) {
